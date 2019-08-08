@@ -14,7 +14,7 @@ let curTetrominoColor;
 let gameBoardArray = [...Array(gameBoardArrayHeight)].map(e => Array(gameBoardArrayWidth).fill(0));
 
 let DIRECTON = {
-    IDLE: 0;
+    IDLE: 0,
     DOWN: 1,
     LEFT: 2,
     RIGHT: 3
@@ -70,13 +70,56 @@ function DrawTetromino(){
         let y = currentTetromino[i][1] + startY;
         gameBoardArray[x][y] = 1;
         let coorX =coordinateArray[x][y].x;
-        let cooY = coordinateArray[x][y].y;
+        let coorY = coordinateArray[x][y].y;
         ctx.fillStyle = curTetrominoColor;
         ctx.fillRect(coorX, coorY, 21, 21);
     }
 }
 function HandleKeyPress(key){
-    if (key.keyCode == 65){
+    if (key.keyCode === 65){
         direction = DIRECTON.LEFT;
+        DeleteTetromino();
+        startX--;
+        DrawTetromino();
+    }else if(key.keyCode === 68){
+        direction = DIRECTON.RIGHT;
+        DeleteTetromino();
+        startX++;
+        DrawTetromino();
+    }else if(key.keyCode === 83){
+        direction = DIRECTON.DOWN;
+        DeleteTetromino();
+        startY++;
+        DrawTetromino();
+
     }
+}
+
+function DeleteTetromino(){
+    for(let i = 0; i<currentTetromino.length; i++){
+        let x = currentTetromino[i][0] + startX;
+        let y = currentTetromino[i][1] + startY;
+        gameBoardArray[x][y] = 0;
+        let coorX = coordinateArray[x][y].x;
+        let coorY = coordinateArray[x][y].y;
+        ctx.fillStyle = 'white';
+        ctx.fillRect(coorX, coorY, 21, 21);
+
+    }
+}
+
+function CreateTetrominos(){
+    tetrominos.push([[1,0], [0,1], [1,1], [2,1]]);
+    tetrominos.push([[0,0], [1,0], [2,0], [3,0]]);
+    tetrominos.push([[0,0], [0,1], [1,1], [2,1]]);
+    tetrominos.push([[0,0], [1,0], [0,1], [1,1]]);
+    tetrominos.push([[2,0], [0,1], [1,1], [2,1]]);
+    tetrominos.push([[1,0], [2,0], [0,1], [1,1]]);
+    tetrominos.push([[0,0], [1,0], [1,1], [2,1]]);
+}
+
+function CreateTetromino(){
+    let randomTetromino = Math.floor(Math.random() * tetrominos.length);
+    currentTetromino = tetrominos[randomTetromino];
+    curTetrominoColor = tetrominoColors[randomTetromino];
 }
