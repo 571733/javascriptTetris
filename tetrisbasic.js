@@ -207,7 +207,7 @@ function CheckForVerticalCollision(){
         if (direction === DIRECTION.DOWN){
             y++;
         }
-        if(gameBoardArray[x]+[y+1] === 1){
+        //if(gameBoardArray[x]+[y+1] === 1){
             if(typeof stoppedShapeArray[x]+[y+1] === 'string'){
                 DeleteTetromino();
                 startY++;
@@ -220,7 +220,7 @@ function CheckForVerticalCollision(){
                 break;
             }
         }
-    }
+   // }
     if(collision){
         if(startY <= 2){
             winOrLoose = "Game Over";
@@ -343,7 +343,7 @@ function RotateTetromino(){
         let y = tetrominoCopy[i][1];
         let newX = (GetLastSquare() - y);
         let newY = x;
-        newRotation.push(newX, newY);
+        newRotation.push([newX, newY]);
     }
     DeleteTetromino();
     try{
