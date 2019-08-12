@@ -208,7 +208,7 @@ function CheckForVerticalCollision(){
             y++;
         }
         //if(gameBoardArray[x]+[y+1] === 1){
-            if(typeof stoppedShapeArray[x]+[y+1] === 'string'){
+            if(typeof stoppedShapeArray[x][y+1] === 'string'){
                 DeleteTetromino();
                 startY++;
                 DrawTetromino();
@@ -227,7 +227,7 @@ function CheckForVerticalCollision(){
             ctx.fillStyle = 'white';
             ctx.fillRect(310, 242, 140, 30);
             ctx.fillStyle = 'black';
-            ctx.fillStyle(winOrLoose, 310, 261);
+            ctx.fillText(winOrLoose, 310, 261);
         }else{
             for (let i=0; i< tetrominocopy.length; i++){
                 let square = tetrominocopy[i];
@@ -302,7 +302,7 @@ if (rowsToDelete >0) {
     ctx.fillRect(310, 109, 140, 19);
     ctx.fillStyle= 'black';
     ctx.fillText(score.toString(), 310, 127);
-    moveAllRowsDown(rowsToDelete, startofDeletion);
+    MoveAllRowsDown(rowsToDelete, startofDeletion);
 }
 }
 
@@ -362,7 +362,7 @@ function RotateTetromino(){
 
 function GetLastSquareX(){
     let lastX = 0;
-    for(let i = 0; i <curTetromino.length; i++){
+    for(let i = 0; i <currentTetromino.length; i++){
         let square = currentTetromino[i];
         if(square[0] > lastX)
             lastX = square[0];
