@@ -133,9 +133,8 @@ function HandleKeyPress(key){
             }
         }else if(key.keyCode === 83){
             MoveTetrominoDown();
-    } else if(key.code === 69){
+    } else if(key.keyCode === 69){
         RotateTetromino();
-
     }
     }
     
@@ -337,11 +336,12 @@ function RotateTetromino(){
     let newRotation = new Array();
     let tetrominoCopy = currentTetromino;
     let currentTetrominoBackUp;
+
     for(let i=0; i<tetrominoCopy.length; i++){
         currentTetrominoBackUp = [...currentTetromino];
         let x = tetrominoCopy[i][0];
         let y = tetrominoCopy[i][1];
-        let newX = (GetLastSquare() - y);
+        let newX = (GetLastSquareX() - y);
         let newY = x;
         newRotation.push([newX, newY]);
     }
